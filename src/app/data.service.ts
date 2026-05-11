@@ -7,7 +7,8 @@ import { Transfert, Beneficiaire, Banque } from './models/transfert.model';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:3001/api';
+  private apiUrl = 'https://elvis-fridge-pavilion-roommate.trycloudflare.com/api';
+  //private apiUrl = 'http://localhost:3001/api';
 
   constructor(private http: HttpClient) { }
 
