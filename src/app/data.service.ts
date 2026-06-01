@@ -7,7 +7,7 @@ import { Transfert, Beneficiaire, Banque } from './models/transfert.model';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://josephine-depense.loca.lt/api';
+  private apiUrl = 'https://ugly-cobra-86.loca.lt';
   //private apiUrl = 'http://localhost:3001/api';
 
   //1. On cree l'entête requise pour contourner la page de localtunnel
