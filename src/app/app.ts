@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { Transfert } from './models/transfert.model';
 import { Beneficiaire } from './models/transfert.model';
@@ -9,7 +8,7 @@ import { Banque } from './models/transfert.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, HttpClientModule],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -47,25 +46,19 @@ export class App {
     });
   }
 
-   loadBeneficiaires() {
-     this.dataService.getBeneficiaires().subscribe({
-       next: (data) => {
-         console.log('Bénéficiaires reçus:', data);
-         this.beneficiaires.set(data);
-       },
-       error: (err) => console.error('Erreur lors de la récupération des bénéficiaires:', err)
-     });
-   }
+  loadBeneficiaires() {
+    this.dataService.getBeneficiaires().subscribe({
+      next: (data) => this.beneficiaires.set(data),
+      error: (err) => console.error('Erreur lors de la récupération des bénéficiaires:', err)
+    });
+  }
 
-   loadBanques() {
-     this.dataService.getBanques().subscribe({
-       next: (data) => {
-         console.log('Banques reçues:', data);
-         this.banques.set(data);
-       },
-       error: (err) => console.error('Erreur lors de la récupération des banques:', err)
-     });
-   }
+  loadBanques() {
+    this.dataService.getBanques().subscribe({
+      next: (data) => this.banques.set(data),
+      error: (err) => console.error('Erreur lors de la récupération des banques:', err)
+    });
+  }
 
    addTransfert() {
      this.dataService.addTransfert(this.newTransfert).subscribe({
