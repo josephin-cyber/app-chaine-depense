@@ -3,7 +3,19 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+// Configuration avancée de CORS pour le tunnel VS Code et Netlify
+app.use(cors({
+    origin: [
+        'http://localhost:4200',
+        'https://chainededepenseform.netlify.app',
+        'https://np8wrqnf-3001.app.online.visualstudio.com'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'bypass-tunnel-reminder', 'x-tunnel-skip-anti-phishing-warning'],
+    credentials: true
+}));
+
 app.use(express.json());
 
 // MySQL connection configuration
