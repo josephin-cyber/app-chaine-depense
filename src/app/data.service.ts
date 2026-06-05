@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transfert, Beneficiaire, Banque } from './models/transfert.model';
 
@@ -7,31 +7,24 @@ import { Transfert, Beneficiaire, Banque } from './models/transfert.model';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://silver-experts-live.loca.lt';
-  //private apiUrl = 'http://localhost:3001/api';
-
-  //1. On cree l'entête requise pour contourner la page de localtunnel
-  private headers = new HttpHeaders({
-    'bypass-tunnel-reminder': 'true'
-  });
+  // On remplace localhost:3001 par l'URL publique de VS Code + la route /api
+  private apiUrl = 'https://np8wrqnf-3001.app.online.visualstudio.com/api';
 
   constructor(private http: HttpClient) { }
 
-  //2. On applique ces headers sur les fonctions de récupération des données
-
   getTransferts(): Observable<Transfert[]> {
-    return this.http.get<Transfert[]>(`${this.apiUrl}/transferts`, { headers: this.headers } );
+    return this.http.get<Transfert[]>(`${this.apiUrl}/transferts`);
   }
 
   getBeneficiaires(): Observable<Beneficiaire[]> {
-    return this.http.get<Beneficiaire[]>(`${this.apiUrl}/beneficiaires`, { headers: this.headers } );
+    return this.http.get<Beneficiaire[]>(`${this.apiUrl}/beneficiaires`);
   }
 
   getBanques(): Observable<Banque[]> {
-    return this.http.get<Banque[]>(`${this.apiUrl}/banques`, { headers: this.headers } );
+    return this.http.get<Banque[]>(`${this.apiUrl}/banques`);
   }
 
   addTransfert(transfert: Omit<Transfert, 'id'>): Observable<Transfert> {
-    return this.http.post<Transfert>(`${this.apiUrl}/transferts`, transfert, { headers: this.headers });
+    return this.http.post<Transfert>(`${this.apiUrl}/transferts`, transfert);
   }
 }
