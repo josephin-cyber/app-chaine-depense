@@ -9,7 +9,7 @@ app.use(cors({
     origin: [
         'http://localhost:4200',
         'https://chainededepenseform.netlify.app',
-        'https://np8wrqnf-3001.app.online.visualstudio.com'
+        'https://np8wrqnf-3001.uks1.devtunnels.ms'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'bypass-tunnel-reminder', 'x-tunnel-skip-anti-phishing-warning'],

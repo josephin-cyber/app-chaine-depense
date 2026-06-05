@@ -8,7 +8,7 @@ import { Transfert, Beneficiaire, Banque } from './models/transfert.model';
 })
 export class DataService {
   // On remplace localhost:3001 par l'URL publique de VS Code + la route /api
-  private apiUrl = 'https://np8wrqnf-3001.app.online.visualstudio.com/api';
+  private apiUrl = 'https://np8wrqnf-3001.uks1.devtunnels.ms/api';
 
   constructor(private http: HttpClient) { }
 
