@@ -7,7 +7,7 @@ import { Transfert, Beneficiaire, Banque } from './models/transfert.model'; // I
 @Component({
   selector: 'app-root',
   standalone: true, // Optionnel mais recommandé selon votre version d'Angular
-  imports: [RouterOutlet, FormsModule], // 💡 LA CORRECTION EST ICI : Ajout de FormsModule dans les imports du composant
+  imports: [ FormsModule], // 💡 LA CORRECTION EST ICI : Ajout de FormsModule dans les imports du composant
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
