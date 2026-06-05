@@ -30,7 +30,9 @@ app.get('/', (req, res) => {
 // GET all transferts
 app.get('/api/transferts', (req, res) => {
     const sql = `
-        SELECT t.*, b.nom as beneficiaire_nom, ba.nom_banque as banque_nom
+        SELECT t.*, 
+               b.id as beneficiaire_id, b.nom as beneficiaire_nom, b.type_beneficiaire as beneficiaire_type, b.service_prestataire as beneficiaire_service,
+               ba.id as banque_id, ba.nom_banque, ba.num_compte, ba.mode_paiement
         FROM transferts t
         LEFT JOIN beneficiaires b ON t.fk_beneficiaire_id = b.id
         LEFT JOIN banques ba ON t.fk_banque_id = ba.id
@@ -41,7 +43,22 @@ app.get('/api/transferts', (req, res) => {
             res.status(500).json({ error: 'Erreur serveur' });
             return;
         }
-        res.json(results);
+        const transferts = results.map(row => ({
+            ...row,
+            beneficiaire: row.beneficiaire_id ? {
+                id: row.beneficiaire_id,
+                nom: row.beneficiaire_nom,
+                type_beneficiaire: row.beneficiaire_type,
+                service_prestataire: row.beneficiaire_service
+            } : null,
+            banque: row.banque_id ? {
+                id: row.banque_id,
+                nom_banque: row.nom_banque,
+                num_compte: row.num_compte,
+                mode_paiement: row.mode_paiement
+            } : null
+        }));
+        res.json(transferts);
     });
 });
 
