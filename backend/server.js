@@ -3,7 +3,18 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+// Configuration CORS absolue pour le développement via Tunnel VS Code
+app.use(cors({
+    origin: function (origin, callback) {
+        // Autorise absolument toutes les origines (Netlify, aperçus de builds, localhost...)
+        callback(null, true);
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'bypass-tunnel-reminder', 'x-tunnel-skip-anti-phishing-warning'],
+    credentials: true
+}));
+
 app.use(express.json());
 
 // MySQL connection configuration
@@ -106,6 +117,6 @@ app.post('/api/transferts', (req, res) => {
     });
 });
 
-app.listen(3001, () => {
+app.listen(3001, '0.0.0.0', () => {
     console.log('Serveur backend en écoute sur le port 3001');
 });

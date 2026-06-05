@@ -47,14 +47,20 @@ export class App implements OnInit {
 
   loadBeneficiaires() {
     this.dataService.getBeneficiaires().subscribe({
-      next: (data) => this.beneficiaires.set(data),
+      next: (data) => {
+        console.log('Bénéficiaires reçus:', data);
+        this.beneficiaires.set(data);
+      },
       error: (err) => console.error('Erreur lors de la récupération des bénéficiaires:', err)
     });
   }
 
   loadBanques() {
     this.dataService.getBanques().subscribe({
-      next: (data) => this.banques.set(data),
+      next: (data) => {
+        console.log('Banques reçues:', data);
+        this.banques.set(data);
+      },
       error: (err) => console.error('Erreur lors de la récupération des banques:', err)
     });
   }

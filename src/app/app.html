@@ -78,24 +78,30 @@
            <label for="date_emission">Date Émission</label>
            <input type="date" id="date_emission" name="date_emission" [(ngModel)]="newTransfert.date_emission" />
          </div>
-         <div class="form-group">
-           <label for="fk_beneficiaire_id">Bénéficiaire</label>
-           <select id="fk_beneficiaire_id" name="fk_beneficiaire_id" [(ngModel)]="newTransfert.fk_beneficiaire_id">
-             <option [ngValue]="null">-- Sélectionner --</option>
-             @for (b of beneficiaires(); track b.id) {
-               <option [ngValue]="b.id">{{ b.nom }} ({{ b.type_beneficiaire || 'N/A' }})</option>
-             }
-           </select>
-         </div>
-         <div class="form-group">
-           <label for="fk_banque_id">Banque</label>
-           <select id="fk_banque_id" name="fk_banque_id" [(ngModel)]="newTransfert.fk_banque_id">
-             <option [ngValue]="null">-- Sélectionner --</option>
-             @for (ba of banques(); track ba.id) {
-               <option [ngValue]="ba.id">{{ ba.nom_banque }} - {{ ba.num_compte }}</option>
-             }
-           </select>
-         </div>
+<div class="form-group">
+            <label for="fk_beneficiaire_id">Bénéficiaire</label>
+            <select id="fk_beneficiaire_id" name="fk_beneficiaire_id" [(ngModel)]="newTransfert.fk_beneficiaire_id">
+              <option [ngValue]="null">-- Sélectionner --</option>
+              @for (b of beneficiaires(); track b.id) {
+                <option [ngValue]="b.id">{{ b.nom }} ({{ b.type_beneficiaire || 'N/A' }})</option>
+              }
+            </select>
+            @if (beneficiaires().length === 0) {
+              <small>Aucun bénéficiaire disponible</small>
+            }
+          </div>
+          <div class="form-group">
+            <label for="fk_banque_id">Banque</label>
+            <select id="fk_banque_id" name="fk_banque_id" [(ngModel)]="newTransfert.fk_banque_id">
+              <option [ngValue]="null">-- Sélectionner --</option>
+              @for (ba of banques(); track ba.id) {
+                <option [ngValue]="ba.id">{{ ba.nom_banque }} - {{ ba.num_compte }}</option>
+              }
+            </select>
+            @if (banques().length === 0) {
+              <small>Aucune banque disponible</small>
+            }
+          </div>
        </div>
      </div>
 
